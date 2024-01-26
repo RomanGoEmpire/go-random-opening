@@ -46,7 +46,10 @@ st.title("Random Opening")
 st.write("This app generates a random opening or stone position for Go.")
 
 
-generate_opening = st.button("Generate Opening")
+enough_games = len(opening) + len(stones) > 1
+generate_opening = st.button("Generate Opening", disabled=not enough_games)
+if not enough_games:
+    st.warning("You need to select at least two options to generate an opening.")
 
 
 def only_opening():
@@ -66,17 +69,7 @@ def only_stones():
 
 
 if generate_opening:
-    if len(opening) == 0 and len(stones) == 0:
-        st.error("Please select at least one option.")
-    elif sum([len(opening), len(stones)]) == 1:
-        st.warning("You only selected one option. This will always be the result.")
-        if len(opening) == 1:
-            st.subheader(opening[0])
-        else:
-            st.subheader(stones[0])
-        selected_opening = opening + stones
-        st.image(f"images/{selected_opening[0]}.png")
-    elif len(stones) == 0:
+    if len(stones) == 0:
         only_opening()
     elif len(opening) == 0:
         only_stones()
