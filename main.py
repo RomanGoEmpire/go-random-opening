@@ -28,7 +28,6 @@ st.set_page_config(
 with st.sidebar:
     st.title("Options")
     st.info("Select which options you want to use for the random opening.")
-    reset = st.button("Reset")
     opening = st.multiselect(
         "Opening",
         openings,
